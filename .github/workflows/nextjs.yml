@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Survey</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:red;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, red, #8C0002);
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: red;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #FF0004fc;
+            padding-bottom: 10px;
+        }
+
+        /* Company Profile Section */
+        .company-profile p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .company-profile img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Survey Form Section */
+        .survey-form label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .survey-form input,
+        .survey-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .survey-form input:focus,
+        .survey-form textarea:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        .survey-form button {
+            width: 100%;
+            padding: 12px;
+            background: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .survey-form button:hover {
+            background:#8C0002;
+        }
+
+        /* Display Submitted Data Section */
+        .submitted-data {
+            grid-column: span 2;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .submitted-data h2 {
+            color: red;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid red;
+            padding-bottom: 10px;
+        }
+
+        .submitted-data p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Links Section */
+        .links {
+            grid-column: span 2; /* Make the links section span both columns */
+        }
+
+        .links a {
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+            padding: 10px 20px;
+            background: red;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .links a:hover {
+            background: #8C0002;
+        }
+
+        .links img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .links {
+                grid-column: span 1;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Block Text Style */
+        #message {
+            display:none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #860000;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Customer Survey</h1>
+    </header>
+
+    <div class="container">
+        <!-- Company Profile Section -->
+        <div class="section company-profile">
+            <h2>Company Profile</h2>
+            <p>Welcome to [Your Company Name], a leading web development company dedicated to creating innovative and user-friendly websites. With a team of experienced developers and designers, we strive to deliver high-quality solutions tailored to meet your business needs.</p>
+            <img src="Images/Logo.png" alt="Company Logo">
+        </div>
+
+        <!-- Online Survey Form Section -->
+        <div class="section survey-form">
+            <h2>Online Survey Form</h2>
+            <form id="surveyForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="5" required></textarea>
+
+                <button type="submit">Submit</button>
+                &nbsp;
+                &nbsp;
+                <button type="button" onclick="displayMessage()">Click to view dev profile!!</button>
+            </form>
+        </div>
+
+        <!-- Display Submitted Data Section -->
+        <div class="section submitted-data" id="submittedData">
+            <h2>Submitted Information</h2>
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Age:</strong> <span id="displayAge"></span></p>
+            <p><strong>Feedback:</strong> <span id="displayFeedback"></span></p>
+        </div>
+
+   
+
+        <!-- Block Text to be Displayed -->
+      <div id="message">
+
+		<h2>Developer Profile: John Doe</h2>
+		<p1>Name: John Doe</p1>  
+        <p> Location: New York, USA
+	    </p>
+        <p>Email: john.doe@example.com</p>
+        <p>&nbsp;Phone: +1 (123) 456-7890&nbsp;</p>
+        <p>&nbsp;LinkedIn: [linkedin.com/in/johndoe](https://linkedin.com/in/johndoe)&nbsp;</p>
+        <p>&nbsp;GitHub: [github.com/johndoe](https://github.com/johndoe)&nbsp;</p>
+        <p>&nbsp;Portfolio: [johndoe.dev](https://johndoe.dev)&nbsp;</p>
+        <p>&nbsp;About Me:
+              I am a passionate and results-driven software developer with over 5 years of experience in building innovative, scalable, and high-performance web applications. I specialize in front-end and back-end development, and I am constantly striving to improve my skills with the latest technologies and frameworks. My goal is to create seamless user experiences while optimizing performance and functionality.&nbsp;</p>
+        <p>&nbsp;I enjoy working in collaborative environments and am always eager to learn and grow. I have a strong focus on clean code and best practices, and I am adept at troubleshooting and problem-solving. Whether working on solo projects or as part of a team, I bring enthusiasm, creativity, and dedication to every task.&nbsp;</p>
+        <h2><strong>&nbsp;Skills&nbsp;</strong></h2>
+<p>&nbsp;- Languages: JavaScript, Python, HTML5, CSS3, TypeScript, SQL, PHP&nbsp;</p>
+<p>&nbsp;- frameworks and Libraries: React.js, Node.js, Express, Vue.js, Django, Laravel&nbsp;</p>
+        <p>&nbsp;- Database Management: MySQL, PostgreSQL, MongoDB, Firebase&nbsp;</p>
+        <p>&nbsp;- Version Control: Git, GitHub, Bitbucket, GitLab
+              - Tools: Docker, Kubernetes, Nginx, Jenkins, Webpack, Babel</p>
+        <p>&nbsp;- Design and UI/UX: Figma, Sketch, Adobe XD, Responsive Design, Material-UI&nbsp;</p>
+        <p>&nbsp;- Cloud and Hosting: AWS, Azure, Google Cloud, Heroku, Netlify&nbsp;</p>
+            <p>&nbsp;- Testing and Automation: Jest, Mocha, Cypress, Selenium, Test-Driven Development (TDD)
+              - Agile Methodologies: Scrum, Kanban, JIRA, Trello </p>
+      </div>     
+		<!-- Links and Images Section -->
+        <div class="section links">
+            <h2>Useful Links</h2>
+            <a href="https://www.yourcompany.com/about">About Us</a>
+            <a href="https://www.yourcompany.com/services">Our Services</a>
+            <a href="https://www.yourcompany.com/contact">Contact Us</a>
+            <img style="width: 10%;height: 23%;margin: -4px;margin-top: 13px;" src="Images/Logo.png" alt="Link Image">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 [Your Company Name]. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle form submission
+        document.getElementById('surveyForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            const feedback = document.getElementById('feedback').value;
+
+            // Display the submitted data
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayEmail').textContent = email;
+            document.getElementById('displayAge').textContent = age;
+            document.getElementById('displayFeedback').textContent = feedback;
+
+            // Show the submitted data section
+            document.getElementById('submittedData').style.display = 'block';
+        });
+
+        // JavaScript to display the block of text when button is clicked
+        function displayMessage() {
+            var messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
